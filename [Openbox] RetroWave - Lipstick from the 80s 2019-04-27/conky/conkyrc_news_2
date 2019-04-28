@@ -1,0 +1,75 @@
+conky.config = {
+
+
+
+own_window = true,
+own_window_type = 'desktop',
+own_window_transparent = true,
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+own_window_argb_visual = true,
+own_window_argb_value = 255,
+
+
+
+
+-- Borders
+	draw_borders = false,
+	
+
+-- Contour around fonts
+	draw_outline = false,
+
+-- Shades
+	draw_shades = false,
+
+
+-- Position
+	gap_y = 350,
+	gap_x = 550,
+
+-- Alignment
+	alignment = 'middle_left',
+-- alignment botton_left
+
+-- Interval
+	update_interval = 2,
+
+-- Colors
+	default_color = '#FFFFFF',
+	color1 = '#1793D1',
+	color2 = '#FFFFFF',
+	color3 = '#FFFFFF',
+	color4 = '#FFFFFF',
+	color5 = '#115588',
+
+-- Font
+	use_xft = false,
+	font = 'PF Tempesta Seven:pixelsize=8',
+
+-- Text alpha when using Xft
+--xftalpha 0
+
+-- to prevent window from moving
+--use_spacer none
+	minimum_width = 450, minimum_height = 300,
+	maximum_width = 450,
+	default_bar_width = 92, default_bar_height = 6,
+
+--${color2}${font PF Tempesta Seven:size=6}${rss https://hnrss.org/newest 1 item_title 1}${font}
+--${color5}${font PF Tempesta Seven:size=5}${rss https://hnrss.org/newest 1 item_desc 1}${font}
+
+
+};
+
+conky.text = [[
+${color1}Hacker News - Most new comments:
+${color4}${rss https://hnrss.org/newest?link=comments 5 item_titles 6}
+
+
+
+#${color1}Hacker - News
+#${color4}${rss https://hnrss.org/newest 15 item_titles 6}
+
+
+]];
+
