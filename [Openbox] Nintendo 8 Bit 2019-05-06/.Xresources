@@ -1,0 +1,56 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+X!ft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcdfilter
+
+
+URxvt.font:xft:anorexia:pixelsize=13
+URxvt.boldfont:xft:Monospace-Bold:pixelsize=13
+!URxvt*font:  -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:pixelsize:12
+!URxvt*boldFont:  -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:bold:pixelsize:12
+!URxvt*italicFont:  xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
+!URxvt*boldItalicFont:  xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=12
+
+! Disable scrollbar
+!URxvt*scrollBar: false
+
+! Scrollbar style - rxvt (default), plain (most compact), next, or xterm
+URxvt.scrollstyle: plain
+
+! Background color
+!URxvt*background: black
+URxvt*background: #1B1B1B
+
+! Font color
+!URxvt*foreground: white
+URxvt*foreground: #00FF00
+
+
+! Other colors
+URxvt*color0: black
+!URxvt*color1: red3
+URxvt*color1: #CD0000
+URxvt*color2: green3
+!URxvt*color3: yellow3
+URxvt*color3: #C4A000
+URxvt*color4: blue2
+!URxvt*color4: #3465A4
+URxvt*color5: magenta3
+URxvt*color6: cyan3
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+!URxvt*color12: blue
+URxvt*color12: #3465A4
+URxvt*color13: magenta
+URxvt*color14: cyan
+URxvt*color15: white
+
+*antialias:  true
+*autohint:   false
+

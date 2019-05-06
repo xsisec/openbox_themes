@@ -1,0 +1,107 @@
+
+#Fonctionnement de conky 
+  total_run_times 0			#Temps en secondes ; 0 = toujours actif
+  background yes				#Pour que conky tourne en arrière plan ; no = pour les tests
+
+#Réglages système
+  cpu_avg_samples 1			#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 2			#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes			#Éviter le clignotement
+  no_buffers yes				#Soustraire les mémoires tampons de la mémoire utilisée
+  text_buffer_size 1024			#Taille du cache pour le texte
+
+#Affichage
+  out_to_console no			#Affiche le texte sur la sortie standard
+  update_interval 1			#Taux de rafraîchissement de la fenêtre (s)
+
+#Fenêtre conky
+  alignment top_right			#Alignement
+ #---
+  minimum_size 300 250 			#Taille minimum (px) ; largeur / hauteur
+  maximum_width 300			#Largeur maximum (px)
+  
+ #---
+  gap_x 0					#Écart avec le bord gauche / droit
+  gap_y 170					#Écart avec le bord haut / bas
+ #---
+  draw_shades no				#Afficher les ombres
+  draw_outline no				#Afficher les contours de fenêtre
+  draw_borders no				#Afficher des contours autour des blocs de texte
+  border_width 1				#Largeur du contour
+  border_inner_margin 1			#Largeur des marges
+ #---
+
+  
+own_window_argb_visual yes
+own_window_argb_value 180
+own_window yes
+own_window_type normal
+own_window_transparent no
+own_window_hints undecorated,below,skip_taskbar,skip_pager
+
+#Mise en forme
+  use_xft yes				#Utiliser Xft (polices lissées etc)
+  xftalpha 0				#Utiliser Xft
+  override_utf8_locale yes 		#Force l'UTF8
+  uppercase no				#Tout le texte en majuscule
+  use_spacer right			#Ajoute des espaces après certains objets (qu'avec des polices fixes)
+ 
+  xftfont anorexia:size=12		#Police par défaut
+ #---
+  default_bar_size 131 6		#Barre par défaut (longeur hauteur)
+  stippled_borders 5			#Taille des pointillés
+
+#Couleurs
+#  default_color FFFFFF 			#Couleur par défaut
+#  default_shade_color 333333		#Couleur des ombres
+#  default_outline_color black		#Couleur des contours
+ #---
+
+
+
+color1 FFFFFF
+color2 15742f
+color3 9f2323
+color4 f0ff00
+color5 12ffd5
+color6 ee3615
+color7 0576f4
+#Download color
+color8 017e16 
+#upload color
+color9 7b1aa7
+#local ip
+
+
+#upload color
+TEXT
+${color6}${hr}
+VIM 
+${hr}
+
+"V" $alignr (v-mode)
+"J" $alignr (v-mode) Select
+"Y" $alignr (v-mode) Copy
+"P" $alignr (n-mode) Paste
+"U" $alignr (n-mode) Undo
+"q!" $alignr (n-mode) Exit  no save
+"P" $alignr (n-mode) Put in selected place
+"GG" $alignr (n-mode) Go to line nr
+"DD" $alignr (n-mode) Delete current line
+"?(xx)"$alignr (n mode) Search on xx
+"Shift + *" +h$alignr Search on highlighted word
+":%s/first/second" $alignr Search for first replace with second
+":%s/first/second/c" $alignr (prompt per occurance)
+":split filename" $alignr (split screen filename)
+":vsplit"$alignr Split vertical
+${hr}
+${color4}${hr}
+TMUX
+${hr}
+
+"ctrl + R " $alignr Recursive search
+"ctrl + B " $alignr Background then "C" New Window
+"ctrl + B" $alignr (number) to switch to session
+

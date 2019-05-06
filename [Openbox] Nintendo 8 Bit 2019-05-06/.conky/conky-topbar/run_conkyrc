@@ -1,0 +1,74 @@
+
+
+  total_run_times 0
+  background yes
+
+
+  cpu_avg_samples 1
+  net_avg_samples 2
+
+
+  double_buffer yes
+  no_buffers yes
+  text_buffer_size 1024
+
+  out_to_console no
+  update_interval 1
+
+
+  alignment top_left
+
+  minimum_size 1920
+  maximum_width 1920
+
+  gap_x 0
+  gap_y 0
+
+  draw_shades no
+  draw_outline no
+  draw_borders no
+  border_width 1
+  border_inner_margin 1
+
+
+
+own_window_argb_visual yes
+own_window_argb_value 180
+own_window yes
+own_window_type normal
+own_window_transparent no
+own_window_hints undecorated,below,skip_taskbar,skip_pager
+
+
+  use_xft yes
+  xftalpha 0
+  override_utf8_locale yes
+  uppercase no
+  use_spacer right
+
+  xftfont anorexia:size=12
+ #---
+  default_bar_size 131 6
+  stippled_borders 5
+
+
+
+color1 FFFFFF
+color2 15742f
+color3 9f2323
+color4 f0ff00
+color5 12ffd5
+color6 ee3615
+color7 0576f4
+#Download color
+color8 017e16
+#upload color
+color9 7b1aa7
+#local ip
+
+
+#upload color
+TEXT
+${image /home/xsisec/.conky/conky-topbar/fond.png -p -1,-1 -s 1920x15}${goto 100}${color1}| ${color2} Hostname ${exec uname -a | cut -c 1-9} ${color1}| ${color3} Kernel ${exec uname -r | cut -c 1-14} ${color1}| ${color4}Home ${fs_free /home} ${color1}| ${color5} Root: ${fs_free /} ${color1}| ${color6} Used RAM $memperc% ${color1}|${color7} Temp: [${exec sensors | grep -m 1 temp1 | cut -c 16-17}°C] ${color1} | ${color8}Download ${upspeedgraph enp2s0 8,120 DC143C DC143C} ${downspeed enp2s0}k/s ${color1} | ${color9}Upload ${upspeedgraph enp2s0 8,120 DC143C DC143C} [${upspeed enp2s0}k/s] ${color1}| ${color3} Local IP:[${if_existing /proc/net/route enp2s0}${addr enp2s0}${else}${if_existing /proc/net/route eth0}${addr eth0}${else}Network disconnected${endif}${endif} ${color1}|${color4} Time ${time} ${color1}|
+${color1}| ${color4}CPU 1 [${cpu 1}%] ${color1}|${goto 100} Process 1: ${top name 1}${top cpu 1}%] ${goto 340} ${color1}| ${color4}CPU 2 [${cpu 2}%] ${color1}| Process 2: ${top name 2}${top cpu 2}%] ${color1}${goto 680} | ${color4}CPU 3 [${cpu 3}%] ${color1}|${goto 800}Process 3: ${top name 3}${top cpu 4}%] ${goto 1070} ${color1}| ${color4}CPU 4 [${cpu 4}%] ${color1}| ${goto 1200}Process 4: ${top name 4} ${color1} ${goto 1420}|${color8} CPU 5 [${cpu 5}%] ${color1}| ${color8}CPU 5 [${cpu 5}%] ${color1}|  ${color8}CPU 6 [${cpu 6}%] ${color1}|  ${color8}CPU 7 [${cpu 7}%] ${color1}| ${color8}CPU 8 [${cpu 8}%] ${color1}| 
+#${font LCDMono:bold:size=20}${color1}Uptime:$color $uptime

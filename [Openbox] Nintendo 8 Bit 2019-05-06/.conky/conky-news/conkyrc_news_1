@@ -1,0 +1,67 @@
+conky.config = {
+
+
+
+own_window_argb_visual = true,
+own_window_argb_value = 180,
+own_window = true,
+own_window_type ='normal',
+own_window_transparent = 'false',
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+font = 'anorexia:size=10',
+
+-- Borders
+	draw_borders = false,
+
+
+-- Contour around fonts
+	draw_outline = false,
+
+-- Shades
+	draw_shades = false,
+
+
+-- Position
+	gap_y = -180,
+	gap_x = 1615,
+
+-- Alignment
+	alignment = 'middle_left',
+-- alignment botton_left
+
+-- Interval
+	update_interval = 1,
+
+-- Colors
+	default_color = '#FFFFFF',
+	color1 = 'green',
+	color2 = '#FFFFFF',
+
+
+-- Font
+	use_xft = true,
+
+
+
+-- Text alpha when using Xft
+--xftalpha 0
+
+-- to prevent window from moving
+--use_spacer none
+	minimum_width = 500,
+	minimum_height = 10,
+	maximum_height = 10,
+	maximum_width = 300,
+
+
+--${color1}${font Tamzyn:size=8}${rss https://hnrss.org/newest 1 item_title 1}${font}
+--${color2}${font anorexia:size=8}${rss https://hnrss.org/newest 1 item_desc 1}${font}
+
+
+};
+
+conky.text = [[
+${color1}Hacker News:
+${color2}${rss https://hnrss.org/newest 15 item_titles 6}
+#${rss http://www.linuxdistrocommunity.com/forums/syndication.php?limit=15 1 item_titles 10}
+]];
