@@ -1,7 +1,7 @@
 conky.config = {
 
 
-
+-- conky news 1
 own_window_argb_visual = true,
 own_window_argb_value = 180,
 own_window = true,
