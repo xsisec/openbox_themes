@@ -1,0 +1,281 @@
+#!/bin/bash
+# adapted from conkycolors by quakeguy
+# --- http://weather.yahoo.com/ ---
+# http://weather.yahooapis.com/forecastrss?w=WOEID&u=UNIT
+# WOEID: Halle - 656853
+# UNIT: c - Celsius, f - Fahrenheit
+# (old id: Halle - GMXX0048)
+
+# changed to weather.com
+# since  03/2016 yahoo requires oauth2
+
+#--- Cities: BEGIN
+#GMXX0048 - Halle (Saale)
+#GMXX0072 - Leipzig
+#GMXX0007 - Berlin
+#UKXX0085 - London
+#ITXX0067 - Rom
+#SPXX0050 - Madrid
+#RSXX0063 - Moskau
+#SFXX0010 - Kapstadt
+#USNY0996 - New York
+#USCA0638 - Los Angeles
+#BRXX0201 - Rio de Janeiro
+#CAXX0301 - Montreal
+#EGXX0004 - Kairo
+#CHXX0008 - Peking
+#KSXX0037 - Seoul
+#JAXX0085 - Tokio
+#VMXX0006 - Hanoi
+#ASXX0112 - Sydney
+#--- Cities: END
+
+# set location
+LOCATION="SWXX0031"
+
+# unit: m - metric, * - non metric
+UNIT="m"
+
+# weekdays in short form (german)
+function getWeekDay() {
+	case "$1" in
+		Monday) echo "Mo." ;;
+		Tuesday) echo "Di." ;;
+		Wednesday) echo "Mi." ;;
+		Thursday) echo "Do." ;;
+		Friday) echo "Fr." ;;
+		Saturday) echo "Sa." ;;
+		Sunday) echo "So." ;;
+	esac
+}
+
+#MAP_OLD=(1 2 3 n m x x y s h t h i p p 8 q u w 7 0 9 4 6 6 - f D d C c A a B b v 5 k k g j o r r - G 0 K)
+MAP_CODE=(1 2 3 n m x x y s h t i i p p 8 q u w 7 0 9 4 6 8 - f e e C c A a B b v 5 k k k j o r r - G 0 K)
+#change__(- - -                 c     x   x           - - c   / c c x x x x / x   -     c                )
+#________(0                   1                   2                   3                   4              )
+
+if   [ "$1" = "GET" ]; then
+  curl -s 'http://wxdata.weather.com/wxdata/weather/local/'$LOCATION'?cc=*&dayf=5&unit='$UNIT -o ~/conky_weatherbox/cache/weather.xml
+elif [ "$1" = "unit_temperature" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ut>/,1!d' | sed 's/.*<ut>\(.*\)<\/ut>.*/\1/'
+elif [ "$1" = "unit_speed" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<us>/,1!d' | sed 's/.*<us>\(.*\)<\/us>.*/\1/'
+elif [ "$1" = "location_city" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<dnam>/,1!d' | sed 's/.*<dnam>\(.*\)<\/dnam>.*/\1/' | sed 's/\(.*\),\(.*\),\(.*\)/\1/'
+elif [ "$1" = "location_time" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<tm>/,1!d' | sed 's/.*<tm>\(.*\)<\/tm>.*/\1/'
+elif [ "$1" = "wind_chill" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<flik>/,1!d' | sed 's/.*<flik>\(.*\)<\/flik>.*/\1/'
+elif [ "$1" = "wind_direction" ]; then
+	WIND_DIRECTION=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<d>/,1!d' | sed -n '2p' | sed 's/.*<d>\(.*\)<\/d>.*/\1/')
+	if [ "$WIND_DIRECTION" -lt "12" ]; then
+		DR="N"
+	elif [ "$WIND_DIRECTION" -lt "34" ]; then
+		DR="NNE"
+	elif [ "$WIND_DIRECTION" -lt "57" ]; then
+		DR="NE"
+	elif [ "$WIND_DIRECTION" -lt "79" ]; then
+		DR="NEE"
+	elif [ "$WIND_DIRECTION" -lt "102" ]; then
+		DR="E"
+	elif [ "$WIND_DIRECTION" -lt "124" ]; then
+		DR="SEE"
+	elif [ "$WIND_DIRECTION" -lt "147" ]; then
+		DR="SE"
+	elif [ "$WIND_DIRECTION" -lt "169" ]; then
+		DR="SSE"
+	elif [ "$WIND_DIRECTION" -lt "192" ]; then
+		DR="S"
+	elif [ "$WIND_DIRECTION" -lt "214" ]; then
+		DR="SSW"
+	elif [ "$WIND_DIRECTION" -lt "237" ]; then
+		DR="SW"
+	elif [ "$WIND_DIRECTION" -lt "259" ]; then
+		DR="SWW"
+	elif [ "$WIND_DIRECTION" -lt "282" ]; then
+		DR="W"
+	elif [ "$WIND_DIRECTION" -lt "304" ]; then
+		DR="NWW"
+	elif [ "$WIND_DIRECTION" -lt "327" ]; then
+		DR="NW"
+	elif [ "$WIND_DIRECTION" -lt "349" ]; then
+		DR="NNW"
+	else
+		DR="N"
+	fi
+	WIND_SPEED=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<s>/,1!d' | sed -n '1p' | sed 's/.*<s>\(.*\)<\/s>.*/\1/')
+	WS=${WIND_SPEED/.*}
+# unit kmh or mph
+  UNIT=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<us>/,1!d' | sed 's/.*<us>\(.*\)<\/us>.*/\1/')
+# calcualte wind speed in kmh as integer
+  if [ "$UNIT" == "mph" ]; then
+    WS=$(echo $WS'*1.60934' | bc | sed 's/[.].*//')
+  fi
+### speed 'calm' = 0
+  if [ "$WS" == "calm" ]; then
+    WS=0
+  fi
+# 0: calm (0 kmh), light air (1-5 kmh)
+	if [ "$WS" -lt "6" ]; then
+		echo "%"
+# 1: light breeze (6-11 kmh), gentle breeze (12-19 kmh)
+	elif [ "$WS" -lt "20" ]; then
+		case "$DR" in
+			N)   echo "9" ;;
+			NNE) echo ":" ;;
+			NE)  echo ";" ;;
+			NEE) echo "<" ;;
+			E)   echo "=" ;;
+			SEE) echo ">" ;;
+			SE)  echo "?" ;;
+			SSE) echo "@" ;;
+			S)   echo "1" ;;
+			SSW) echo "2" ;;
+			SW)  echo "3" ;;
+			SWW) echo "4" ;;
+			W)   echo "5" ;;
+			NWW) echo "6" ;;
+			NW)  echo "7" ;;
+			NNW) echo "8" ;;
+		esac
+# 2: moderate breeze (20-28 kmh), fresh breeze (29-38 kmh)
+	elif [ "$WS" -lt "39" ]; then
+		case "$DR" in
+			N)   echo "I" ;;
+			NNE) echo "J" ;;
+			NE)  echo "K" ;;
+			NEE) echo "L" ;;
+			E)   echo "M" ;;
+			SEE) echo "N" ;;
+			SE)  echo "O" ;;
+			SSE) echo "P" ;;
+			S)   echo "A" ;;
+			SSW) echo "B" ;;
+			SW)  echo "C" ;;
+			SWW) echo "D" ;;
+			W)   echo "E" ;;
+			NWW) echo "F" ;;
+			NW)  echo "G" ;;
+			NNW) echo "H" ;;
+		esac
+# 3: strong breeze (39-49 kmh), moderate gale (50-61 kmh)
+	elif [ "$WS" -lt "62" ]; then
+		case "$DR" in
+			N)   echo "Y" ;;
+			NNE) echo "Z" ;;
+			NE)  echo "[" ;;
+			NEE) echo "\\" ;;
+			E)   echo "]" ;;
+			SEE) echo "^" ;;
+			SE)  echo "_" ;;
+			SSE) echo "\`" ;;
+			S)   echo "Q" ;;
+			SSW) echo "R" ;;
+			SW)  echo "S" ;;
+			SWW) echo "T" ;;
+			W)   echo "U" ;;
+			NWW) echo "V" ;;
+			NW)  echo "W" ;;
+			NNW) echo "X" ;;
+		esac
+# 4: fresh gale (62-74 kmh), strong gale (75-88 kmh), whole gale (89-102 kmh), storm (103-117 kmh), hurricane (>117 kmh)
+	else
+		case "$DR" in
+			N)   echo "i" ;;
+			NNE) echo "j" ;;
+			NE)  echo "k" ;;
+			NEE) echo "l" ;;
+			E)   echo "m" ;;
+			SEE) echo "n" ;;
+			SE)  echo "o" ;;
+			SSE) echo "p" ;;
+			S)   echo "a" ;;
+			SSW) echo "b" ;;
+			SW)  echo "c" ;;
+			SWW) echo "d" ;;
+			W)   echo "e" ;;
+			NWW) echo "f" ;;
+			NW)  echo "g" ;;
+			NNW) echo "h" ;;
+		esac
+	fi
+elif [ "$1" = "wind_speed" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<s>/,1!d' | sed -n '1p' | sed 's/.*<s>\(.*\)<\/s>.*/\1/'
+elif [ "$1" = "atmosphere_humidity" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hmid>/,1!d' | sed -n '1p' | sed 's/.*<hmid>\(.*\)<\/hmid>.*/\1/'
+elif [ "$1" = "atmosphere_visibility" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<vis>/,1!d' | sed 's/.*<vis>\(.*\)<\/vis>.*/\1/'
+elif [ "$1" = "astronomy_sunrise" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<sunr>/,1!d' | sed -n '1p' | sed 's/.*<sunr>\(.*\)<\/sunr>.*/\1/'
+elif [ "$1" = "astronomy_sunset" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<suns>/,1!d' | sed -n '1p' | sed 's/.*<suns>\(.*\)<\/suns>.*/\1/'
+elif [ "$1" = "condition_temp" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<tmp>/,1!d' | sed 's/.*<tmp>\(.*\)<\/tmp>.*/\1/'
+elif [ "$1" = "condition_code" ]; then
+	CONDITION_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '1p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$CONDITION_CODE]}
+elif [ "$1" = "condition_date" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<lsup>/,1!d' | sed -n '1p' | sed 's/.*<lsup>\(.*\)<\/lsup>.*/\1/'
+elif [ "$1" = "forecast1_day" ]; then
+	DAY1=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<day d="0"/,1!d' | sed 's/.* t="\(.*\)" .*/\1/')
+	getWeekDay $DAY1
+elif [ "$1" = "forecast1_low" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<low>/,1!d' | sed -n '1p' | sed 's/.*<low>\(.*\)<\/low>.*/\1/'
+elif [ "$1" = "forecast1_high" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hi>/,1!d' | sed -n '1p' | sed 's/.*<hi>\(.*\)<\/hi>.*/\1/'
+elif [ "$1" = "forecast1_code" ]; then
+	FORECAST1_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '4p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$FORECAST1_CODE]}
+elif [ "$1" = "forecast1_rain" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ppcp>/,1!d' | sed -n '2p' | sed 's/.*<ppcp>\(.*\)<\/ppcp>.*/\1/'
+elif [ "$1" = "forecast2_day" ]; then
+	DAY2=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<day d="1"/,1!d' | sed 's/.* t="\(.*\)" .*/\1/')
+	getWeekDay $DAY2
+elif [ "$1" = "forecast2_low" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<low>/,1!d' | sed -n '2p' | sed 's/.*<low>\(.*\)<\/low>.*/\1/'
+elif [ "$1" = "forecast2_high" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hi>/,1!d' | sed -n '2p' | sed 's/.*<hi>\(.*\)<\/hi>.*/\1/'
+elif [ "$1" = "forecast2_code" ]; then
+	FORECAST2_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '5p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$FORECAST2_CODE]}
+elif [ "$1" = "forecast2_rain" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ppcp>/,1!d' | sed -n '3p' | sed 's/.*<ppcp>\(.*\)<\/ppcp>.*/\1/'
+elif [ "$1" = "forecast3_day" ]; then
+	DAY3=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<day d="2"/,1!d' | sed 's/.* t="\(.*\)" .*/\1/')
+	getWeekDay $DAY3
+elif [ "$1" = "forecast3_low" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<low>/,1!d' | sed -n '3p' | sed 's/.*<low>\(.*\)<\/low>.*/\1/'
+elif [ "$1" = "forecast3_high" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hi>/,1!d' | sed -n '3p' | sed 's/.*<hi>\(.*\)<\/hi>.*/\1/'
+elif [ "$1" = "forecast3_code" ]; then
+	FORECAST3_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '7p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$FORECAST3_CODE]}
+elif [ "$1" = "forecast3_rain" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ppcp>/,1!d' | sed -n '5p' | sed 's/.*<ppcp>\(.*\)<\/ppcp>.*/\1/'
+elif [ "$1" = "forecast4_day" ]; then
+	DAY4=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<day d="3"/,1!d' | sed 's/.* t="\(.*\)" .*/\1/')
+	getWeekDay $DAY4
+elif [ "$1" = "forecast4_low" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<low>/,1!d' | sed -n '4p' | sed 's/.*<low>\(.*\)<\/low>.*/\1/'
+elif [ "$1" = "forecast4_high" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hi>/,1!d' | sed -n '4p' | sed 's/.*<hi>\(.*\)<\/hi>.*/\1/'
+elif [ "$1" = "forecast4_code" ]; then
+	FORECAST4_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '9p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$FORECAST4_CODE]}
+elif [ "$1" = "forecast4_rain" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ppcp>/,1!d' | sed -n '7p' | sed 's/.*<ppcp>\(.*\)<\/ppcp>.*/\1/'
+elif [ "$1" = "forecast5_day" ]; then
+	DAY5=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<day d="4"/,1!d' | sed 's/.* t="\(.*\)" .*/\1/')
+	getWeekDay $DAY5
+elif [ "$1" = "forecast5_low" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<low>/,1!d' | sed -n '5p' | sed 's/.*<low>\(.*\)<\/low>.*/\1/'
+elif [ "$1" = "forecast5_high" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<hi>/,1!d' | sed -n '5p' | sed 's/.*<hi>\(.*\)<\/hi>.*/\1/'
+elif [ "$1" = "forecast5_code" ]; then
+	FORECAST5_CODE=$(cat ~/conky_weatherbox/cache/weather.xml | sed '/<icon>/,1!d' | sed -n '11p' | sed 's/.*<icon>\(.*\)<\/icon>.*/\1/')
+  echo ${MAP_CODE[$FORECAST5_CODE]}
+elif [ "$1" = "forecast5_rain" ]; then
+	cat ~/conky_weatherbox/cache/weather.xml | sed '/<ppcp>/,1!d' | sed -n '9p' | sed 's/.*<ppcp>\(.*\)<\/ppcp>.*/\1/'
+else
+	echo "Error: undefined option"
+fi

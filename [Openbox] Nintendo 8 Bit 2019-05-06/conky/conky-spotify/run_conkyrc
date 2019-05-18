@@ -35,8 +35,8 @@ conky.config = {
 };
 
 conky.text = [[
-${if_running spotify}${voffset 0}${color green}Spotify (${exec ~/.conky/conky-spotify/scripts/status.sh}) $hr $color
-Title: ${exec ~/.conky/conky-spotify/scripts/title.sh}
-Artist: ${exec ~/.conky/conky-spotify/scripts/artist.sh}
-Album: ${exec ~/.conky/conky-spotify/scripts/album.sh}${voffset 10}${endif}
+${if_running spotify}${voffset 0}${color green}Spotify (${exec /home/xsisec/.config/conky/conky-spotify/scripts/status.sh}) $hr $color
+Title: ${exec /home/xsisec/.config/conky/conky-spotify/scripts/title.sh}
+Artist: ${exec /home/xsisec/.config/conky/conky-spotify/scripts/artist.sh}
+Album: ${exec /home/xsisec/.config/conky/conky-spotify/scripts/album.sh}${voffset 10}${endif}
 ]];

@@ -4,7 +4,7 @@ own_window_argb_visual = true,
 own_window_argb_value = 180,
 own_window = true,
 own_window_type ='normal',
-own_window_transparent = 'false',
+own_window_transparent = false,
 own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 font = 'anorexia:size=10',
 -- Borders
@@ -47,10 +47,9 @@ font = 'anorexia:size=10',
 --use_spacer none
 	minimum_width = 500,
 	minimum_height = 10,
-	maximum_height = 10,
 	maximum_width = 300,
 
 }
 conky.text = [[
-${color f9f999}${color orange} ${execpi 60 /home/xsisec/.conky/conky-gmail/gmail.py}
+${color f9f999}${color orange} ${execpi 60 /home/xsisec/.config/conky/conky-gmail/gmail.py}
 ]]

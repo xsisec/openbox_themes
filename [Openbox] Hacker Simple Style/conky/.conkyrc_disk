@@ -1,0 +1,91 @@
+
+# Use Xft?
+use_xft yes
+xftfont cure:size=6
+
+# Update interval in seconds
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window  yes
+own_window_transparent no
+own_window_type widget
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager,
+
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 280 5
+
+maximum_width 87
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders yes
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+#border_margin 5
+
+# border width
+#border_width 1
+
+# Default colors and also border colors
+default_color 303030
+#default_shade_color white
+#default_outline_color black
+own_window_colour 262524
+
+# Text alignment, other possible values are commented
+alignment top_left
+#alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 1820
+gap_y 715
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer yes
+
+TEXT
+${color 9ACD32}Disk IO:${color a4a4a4} ${alignr 4}$diskio
+${color 556B2F}${diskiograph 20,85 556B2F 9ACD32}
+${color 9ACD32}Root:     ${color a4a4a4}${fs_free /}
+${color 556B2F}${fs_bar 3,85 /}
+${color 9ACD32}Home:    ${color a4a4a4}${fs_free /home/}
+${color 556B2F}${fs_bar 3,85 /home/}
+${color 9ACD32}Windows:      ${color a4a4a4}${fs_free /mnt/Windows}
+${color 556B2F}${fs_bar 3,85 /mnt/Windows}
