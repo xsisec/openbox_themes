@@ -6,7 +6,7 @@ conky.config = {
     update_interval = 1,
     font = 'anorexia:size=6',
     alignment = 'top_left',
-    gap_x = 1700,
+    gap_x = 1655,
     gap_y = 825,
     default_color='262524',
     own_window = true,
@@ -19,6 +19,7 @@ conky.config = {
     draw_outline = false,
     draw_borders = true,
     stippled_borders =0,
+    minimum_width=250,            -- This means the display won't wriggle around if things
     draw_graph_borders = false,
 
 
