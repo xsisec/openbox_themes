@@ -7,7 +7,7 @@ conky.config = {
     font = 'anorexia:size=6',
     alignment = 'top_left',
     gap_x = 1655,
-    gap_y = 825,
+    gap_y = 880,
     default_color='262524',
     own_window = true,
     own_window_colour='303030',

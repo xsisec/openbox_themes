@@ -82,10 +82,16 @@ use_spacer yes
 
 TEXT
 ${color 9ACD32}Disk IO:${color a4a4a4} ${alignr 4}$diskio
+
 ${color 556B2F}${diskiograph 20,85 556B2F 9ACD32}
 ${color 9ACD32}Root:     ${color a4a4a4}${fs_free /}
 ${color 556B2F}${fs_bar 3,85 /}
+
 ${color 9ACD32}Home:    ${color a4a4a4}${fs_free /home/}
 ${color 556B2F}${fs_bar 3,85 /home/}
+
 ${color 9ACD32}Windows:      ${color a4a4a4}${fs_free /mnt/Windows}
 ${color 556B2F}${fs_bar 3,85 /mnt/Windows}
+
+${color 9ACD32}Disk X:      ${color a4a4a4}${fs_free /media/veracrypt1}
+${color 556B2F}${fs_bar 3,85 /media/veracrypt1}
