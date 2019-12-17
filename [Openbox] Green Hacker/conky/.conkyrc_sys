@@ -1,0 +1,119 @@
+# Use Xft?
+use_xft yes
+xftfont tamzyn:size=7
+
+# Update interval in seconds
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window  yes
+own_window_transparent no
+own_window_type widget
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager,
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 280 5
+
+maximum_width 87
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders yes
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+#border_margin 5
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color 303030
+#default_shade_color white
+#default_outline_color black
+own_window_colour 262524
+
+# Text alignment, other possible values are commented
+alignment top_left
+#alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 1820
+gap_y 110
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer yes
+
+#9ACD32
+#5c97bc
+
+TEXT
+${color 009e60}Debian${color a4a4a4} Stretch 4.9
+${color 009e60}Kernel:${color a4a4a4}${alignr}$kernel
+${color 009e60}UpTime:${color a4a4a4}${alignr}$uptime
+
+${color 009e60}${execi 300 perl /home/xsisec/.config/conky/scripts/conky-updates.pl}
+${color 009e60}cpu1:${color a4a4a4}${alignr}${cpu cpu1}% ${color 009e60}${execi 20 sensors  |grep Core0 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu1 20,85 5c97bc #e65c25}
+${color 009e60}Cpu2:${color a4a4a4}${alignr}${cpu cpu2}% ${color 009e60}${execi 20 sensors |grep Core1 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu2 20,85 5c97bc #e65c25}
+${color 009e60}Cpu3:${color a4a4a4}${alignr}${cpu cpu3}% ${color 009e60}${execi 20 sensors |grep Core2 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu3 20,85 5c97bc #e65c25}
+${color 009e60}Cpu4:${color a4a4a4}${alignr}${cpu cpu4}% ${color 009e60}${execi 20 sensors |grep Core3 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu4 20,85 5c97bc #e65c25}
+${color 009e60}Cpu5:${color a4a4a4}${alignr}${cpu cpu5}% ${color 009e60}${execi 20 sensors |grep Core4 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu5 20,85 5c97bc #e65c25}
+${color 009e60}Cpu6:${color a4a4a4}${alignr}${cpu cpu6}% ${color 009e60}${execi 20 sensors |grep Core5 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu6 20,85 5c97bc #e65c25}
+${color 009e60}Cpu7:${color a4a4a4}${alignr}${cpu cpu7}% ${color 009e60}${execi 20 sensors |grep Core6 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu7 20,85 5c97bc #e65c25}
+${color 009e60}Cpu8:${color a4a4a4}${alignr}${cpu cpu8}% ${color 009e60}${execi 20 sensors |grep Core7 |awk '{print $3}'}
+${color 009e60}${cpugraph cpu8 20,85 5c97bc #e65c25}
+
+${color 009e60}${offset 21}$font cpu 1 ${color2}[${freq 1}mhz]
+${color 009e60}${offset 21}$font cpu 2 ${color2}[${freq 2}mhz]
+${color 009e60}${offset 21}$font cpu 3 ${color2}[${freq 3}mhz]
+${color 009e60}${offset 21}$font cpu 4 ${color2}[${freq 4}mhz]
+${color 009e60}${offset 21}$font cpu 5 ${color2}[${freq 5}mhz]
+${color 009e60}${offset 21}$font cpu 6 ${color2}[${freq 6}mhz]
+${color 009e60}${offset 21}$font cpu 7 ${color2}[${freq 7}mhz]
+${color 009e60}${offset 21}$font cpu 8 ${color2}[${freq 8}mhz]
+
+${color 009e60}GPU:${color a4a4a4}${alignr}${execi 20 nvidia-settings -q GPUCurrentClockFreqs |grep Attribute |awk '{print $4}' |cut -c1-7} 
+${color 009e60} ${execi 20 nvidia-settings -q gpucoretemp |grep Attribute |awk '{print $4}'}°C
+${color 009e60}Ram:${color a4a4a4}${alignr}$mem
+${color 009e60}${membar 3,85}

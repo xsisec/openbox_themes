@@ -1,0 +1,62 @@
+conky.config = {
+-- conky news 1
+own_window_argb_visual = true,
+double_buffer= true,
+own_window = true,
+own_window_type ='desktop',
+own_window_transparent = 'false',
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+font = 'anorexia:size=10',
+
+-- Borders
+	draw_borders = false,
+
+-- Contour around fonts
+	draw_outline = false,
+
+-- Shades
+	draw_shades = false,
+
+
+-- Position
+	gap_y =20,
+	gap_x = 120,
+
+-- Alignment
+	alignment = 'top_right',
+-- alignment botton_left
+
+-- Interval
+	update_interval = 1,
+
+-- Colors
+	--default_color = '#FFFFFF',
+	own_window_colour ='262524',
+	default_color = '303030',
+	color1 = '#009e60',
+	color2 = '#FFFFFF',
+
+
+-- Font
+	use_xft = true,
+
+
+
+-- Text alpha when using Xft
+--xftalpha 0
+
+-- to prevent window from moving
+--use_spacer none
+	minimum_width = 320,
+
+
+	maximum_width = 500,
+
+
+};
+
+
+conky.text = [[
+${color1}Hacker News:
+${color2}${font tamzyn:size=8}${rss https://hnrss.org/newest 15 item_titles 6}
+]];

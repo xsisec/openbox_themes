@@ -1,0 +1,4 @@
+#define desk_width 5
+#define desk_height 5
+static unsigned char desk_bits[] = {
+   0x04, 0x0a, 0x11, 0x0a, 0x04 };
