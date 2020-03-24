@@ -1,0 +1,42 @@
+conky.config = {
+   font = 'Hack-Regular:pixelsize=10',
+   alignment = 'top_right',
+   background = true,
+   cpu_avg_samples = 4,
+   default_color = 'CCCCCC',
+   color1='D34E18',
+   draw_borders = false,
+   draw_graph_borders = true,
+   draw_outline = false,
+   draw_shades = false,
+   use_xft = true,
+   no_buffers = true,
+   out_to_console = false,
+   out_to_stderr = false,
+   extra_newline = false,
+   own_window = true,
+   own_window_class = 'Conky',
+   own_window_type = 'desktop',
+   stippled_borders = 0,
+   update_interval = 5,
+   uppercase = false,
+   use_spacer = 'none',
+   show_graph_scale = false,
+   show_graph_range = false,
+   double_buffer = true,
+   own_window = true,
+   own_window_transparent = true,
+   own_window_type = 'normal',
+   own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    gap_x = 300,
+    gap_y = 30
+
+};
+
+
+conky.text = [[
+
+${color1}Cert:
+${color2}${rss https://cert.se/feed.rss 15 item_titles 6}
+
+]];

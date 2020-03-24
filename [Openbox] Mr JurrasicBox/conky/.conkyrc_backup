@@ -1,0 +1,128 @@
+# Based on Conky-Faenza 2.3
+
+
+# Default Fonts
+use_xft yes
+xftfont PF Tempesta Five Condensed:pixelsize=8
+override_utf8_locale yes
+# Performance Settings
+double_buffer yes
+
+# Cache Setting
+#imlib_cache_size 0
+
+# Window Settings
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Window border
+draw_borders no
+draw_shades no
+draw_graph_borders no
+
+# Default Color
+default_color CCCCCC
+
+# Color Title.
+color0 D34E18
+
+# Size and position
+
+alignment top_right
+gap_x 20
+gap_y 30
+
+TEXT
+# CPU
+
+
+${goto 20}CPU usage:${goto 149}${cpu cpu0}%
+${goto 20}${top name 1}${goto 120}: ${top cpu 1}%
+${goto 20}${top name 2}${goto 120}: ${top cpu 2}%
+${goto 20}${top name 3}${goto 120}: ${top cpu 3}%
+${image ~/.conky/icons/system.png -p 160,30 40x40}
+${goto 13}${cpugraph 20,185 FFFFFF 1892d3}
+
+#Mem
+${goto 20}Total of ${processes} processes
+${goto 20}${running_processes} of them didn't sleep
+${goto 20}${top name 1}${goto 120}: ${top mem 1}%
+${goto 20}${top name 2}${goto 120}: ${top mem 2}%
+${goto 20}${top name 3}${goto 120}: ${top mem 3}%
+${goto 20}RAM usage ${memperc}%
+${goto 13}${memgraph 20,185 FFFFFF d35018}
+${image ~/.conky/icons/memory.png -p 160,130 40x40}
+
+# GPU
+${goto 20}NVIDIA ${execi 10 nvidia-smi | grep "GeForce" | cut -c 6-23}
+${goto 20}Total${goto 85}${execi 10 nvidia-smi -a | grep MiB | grep "Total" | grep "4" | cut -c 39-46}${goto 115}Mb
+${goto 20}Used${goto 85}${execi 10 nvidia-smi -i 0 -q -d MEMORY,UTILIZATION,POWER,CLOCK,COMPUTE  | grep "Used" | grep -E '(^|[^0-9])[0-9]{3}($|[^0-9])' | cut -c 39-50}${goto 115}Mb
+${goto 20}Free${goto 85}${execi 10 nvidia-smi -i 0 -q -d MEMORY,UTILIZATION,POWER,CLOCK,COMPUTE | grep -E '(^|[^0-9])[0-9]{4}($|[^0-9])' | grep "Free" | cut -c 39-50}${goto 115}Mb
+${goto 20}Driver${goto 85}${exec nvidia-smi | grep Driver | cut -c 41-49} 
+${goto 20}Fan speed :  ${goto 85} ${execi 10 nvidia-smi -a | grep 'Fan Speed' | awk '{print $4,$5}' | sed 's/ //'}
+${image ~/.conky/icons/nvidia.png -p 160,245 40x40}
+
+# TEMP
+${goto 20}GPU Temp  ${goto 110} : ${execi 10 nvidia-smi -q -d temperature | grep "GPU Current Temp" | cut -c 39-50}
+${goto 20}HDD Temp  ${goto 110} : ${hddtemp}°C
+${goto 20}CPU0 Temp ${goto 110} : ${execi 5 sensors | grep 'Core 0' | cut -c 17-19}°C
+${goto 20}CPU1 Temp ${goto 110} : ${execi 5 sensors | grep 'Core 1' | cut -c 17-19}°C
+${goto 20}CPU2 Temp ${goto 110} : ${execi 5 sensors | grep 'Core 2' | cut -c 17-19}°C
+${goto 20}CPU3 Temp ${goto 110} : ${execi 5 sensors | grep 'Core 3' | cut -c 17-19}°C
+${image ~/.conky/icons/temp.png -p 160,340 40x40}
+
+# NETWORK
+#Wired
+
+${goto 20}Local IP${goto 70}: ${addrs enp2s0}
+
+
+${goto 20}Public IP${goto 70}: ${execi 60 wget -O - -q icanhazip.com}
+${image ~/.conky/icons/network.png -p 160,445 40x40}
+
+
+
+ROOT& Home:  ${fs_used /}/${fs_size /}
+${fs_used_perc /}%${fs_bar 5,130 /}
+HDD Temp: ${exec sudo hddtemp /dev/sdb | cut -c27-40}
+${image ~/.conky/icons/media.png -p 160,510 40x40}
+
+
+HOME: ${fs_used /home}/${fs_free /home}
+${fs_used_perc /home}% ${fs_bar 5,130 /home}
+HDD Temp: ${exec sudo hddtemp /dev/sdb | cut -c27-40}
+${image ~/.conky/icons/media.png -p 160,565 40x40}
+
+
+Windows CP: ${fs_used /mnt/Windows}/${fs_free /mnt/Windows}
+${fs_used_perc /mnt/Windows}% ${fs_bar 5,130 /mnt/Windows}
+HDD Temp: [No Sens]
+${image ~/.conky/icons/media.png -p 160,620 40x40}
+
+
+Games: ${fs_used /mnt/Games}/${fs_free /mnt/Games}
+${fs_used_perc /mnt/Games}% ${fs_bar 5,130 /mnt/Games}
+HDD Temp: ${exec sudo hddtemp /dev/sda | cut -c34-40}
+${image ~/.conky/icons/media.png -p 160,675 40x40}
+
+
+VerCrypt-1: ${fs_used /media/veracrypt1}/${fs_free /media/veracrypt1}
+${fs_used_perc /media/veracrypt1}% ${fs_bar 5,130 /media/veracrypt1}
+HDD Temp: ${exec sudo hddtemp /dev/sdd | cut -c31-40}
+${image ~/.conky/icons/media.png -p 160,730 40x40}
+
+
+VerCrypt-2: ${fs_used /media/veracrypt2}/${fs_free /media/veracrypt2}
+${fs_used_perc /media/veracrypt2}% ${fs_bar 5,130 /media/veracrypt2}
+HDD Temp: ${exec  sudo hddtemp /dev/sde | cut -c 24-27}
+${image ~/.conky/icons/media.png -p 160,785 40x40}
+
+
+${goto 0}Kernel${goto 70} : ${kernel}
+${goto 0}Dist${goto 70} : ${exec lsb_release -d | cut -c 14-41}
+${goto 0}Users${goto 70} : XsiSec
+${goto 0}Uptime${goto 70} : ${uptime_short}
+${image ~/.conky/icons/info.png -p 160,870  40x40}
+
