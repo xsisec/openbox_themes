@@ -1,5 +1,3 @@
-My setup for [Linux d0m 4.9.0-8-amd64 #1 SMP Debian 4.9.144-3.1 (2019-02-19) x86_64 GNU/Linux]
-
 
 Also posted on Reddit Channel #unixporn
 https://www.reddit.com/r/unixporn/comments/blf544/openbox_ninteno_8_bit_becomes_real/
