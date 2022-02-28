@@ -1,0 +1,111 @@
+conky.config = {
+-- conky news 1
+double_buffer= true,
+ own_window = true,
+ own_window_type = 'desktop',
+ own_window_argb_visual = true,
+ own_window_transparent = true,
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+font = 'anorexia:size=12',
+
+-- Borders
+	draw_borders = false,
+
+-- Contour around fonts
+	draw_outline = false,
+
+-- Shades
+	draw_shades = false,
+
+
+-- Position
+	gap_y =110,
+	gap_x = 10,
+
+-- Alignment
+	alignment = 'top_right',
+-- alignment botton_left
+
+-- Interval
+	update_interval = 1,
+
+-- Colors
+	--default_color = '#FFFFFF',
+	--own_window_colour ='262524',
+	--default_color = '303030',
+	-- old color1 = '#009e60',
+    color1 = '00FFFF',
+	color2 = '#FFFFFF',
+
+-- Font
+	use_xft = true,
+-- Text alpha when using Xft
+--xftalpha 0
+
+-- to prevent window from moving
+--use_spacer none
+	minimum_width = 320,
+	maximum_width = 500,
+
+};
+
+conky.text = [[
+
+${color1}${font anorexia:size=12}WORKSPACES:
+${color2}${font Hack:size=9}[Keypad {1-4}]     Workspace 1-4.
+${color2}${font Hack:size=9}[Keypad {1-4}]     Workspace 1-4.
+
+${color1}${font anorexia:size=10}WINDOWS:
+${color2}${font Hack:size=9}[Shift -1]   move Window next Monitor.
+${color2}${font Hack:size=9}[Alt-Up]     Maximize/Normalize Window.
+${color2}${font Hack:size=9}[Alt-Right] Keep window right-side.
+${color2}${font Hack:size=9}[Alt-Left]  Keep window left side.
+
+${color1}${font anorexia:size=10}TERMINAL:
+${color2}${font Hack:size=9}[Shift Down]     split terminal vertical.
+${color2}${font Hack:size=9}[Shift Right]     split terminal horizontal.
+
+${color1}${font anorexia:size=10}VIM:
+
+${color2}${font Hack:size=9}[F3]     copy all lines
+${color2}${font Hack:size=9}[F7]     delete all lines
+
+${color2}${font Hack:size=9}[Ctrl-J]     Move block up.
+${color2}${font Hack:size=9}[Ctrl-K]     Move block Down.
+${color2}${font Hack:size=9}[Ctrl-U]     Make indent.
+${color2}${font Hack:size=9}[Shift-TAB]     Remove indent.
+
+${color2}${font Hack:size=9}[Shift-Tab]     toggle vim tab.
+${color2}${font Hack:size=9}[Ctrl-Shift-Left]     Move Column left.
+${color2}${font Hack:size=9}[Ctrl-Shift-right]     Move Column right.
+
+${color2}${font Hack:size=9}[Ctrl-p] Search for file
+${color2}${font Hack:size=9}[,-l] Search for character
+
+
+${color2}${font Hack:size=9}[F9] python file 
+${color2}${font Hack:size=9}[Ctrl-r] Run bash file no args.
+${color2}${font Hack:size=9}[Ctrl-x] Run bash file with args.
+
+${color2}${font Hack:size=9}[Ctrl-y] Run java file no args.
+${color2}${font Hack:size=9}[Ctrl-u] Run java file with args.
+
+${color2}${font Hack:size=9}[F8] Make comment.
+
+${color2}${font Hack:size=9}[Ctrl-w] focus on tree
+
+${color2}${font Hack:size=9}[Ctrl-z] temp-close vim.
+${color2}${font Hack:size=9}[Ctrl-z] fg - to get it back.
+
+${color2}${font Hack:size=9}[w] Move between words.
+${color2}${font Hack:size=9}[b] Move between special characters.
+${color2}${font Hack:size=9}[*] Move to next occurence.
+
+
+${color1}${font anorexia:size=10}Bash Templates
+${color2}${font Hack:size=9}[space+t] [CREATE] 
+${color2}${font Hack:size=9}[space+g] [GET] 
+${color2}${font Hack:size=9}[space+d] [DELETE]
+
+]];
+

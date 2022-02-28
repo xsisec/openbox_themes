@@ -1,0 +1,41 @@
+conky.config = {
+
+    no_buffers = true,
+    use_xft = true,
+    cpu_avg_samples = 2,
+    update_interval = 0.5,
+    font = 'anorexia:size=10',
+    alignment = 'top_left',
+    gap_x = 1545,
+    gap_y = 500,
+    default_color='262524',
+    own_window = true,
+    own_window_colour='303030',
+    own_window_type='desktop',    -- No borders, always visible on the desktop,
+    own_window_transparent = false,
+    own_window_hints = 'undecorated,below,sticky,skip_pager',
+    double_buffer = true,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    stippled_borders =0,
+    minimum_width=250,            -- This means the display won't wriggle around if things
+    draw_graph_borders = false,
+
+
+};
+
+conky.text = [[
+# --- Get Spotify Cover ---
+${if_running spotify}${exec ~/.config/conky/conky-spotify/scripts/cover.sh}${endif}${image /home/xsisec/.config/conky/conky-spotify/current/current.jpg -p 0,10 -s 92x92}
+# --- Show now playing information ---
+${goto 105}${color 009e60}Artist:
+${goto 105}${color #FFFFFF}${exec /home/xsisec/.config/conky/conky-spotify/scripts/artist.sh}
+
+${goto 105}${color 009e60}Album:
+${goto 105}${color #FFFFFF}${exec /home/xsisec/.config/conky/conky-spotify/scripts/album.sh}
+
+${goto 105}${color 009e60}Title:
+${goto 105}${color #FFFFFF}${exec /home/xsisec/.config/conky/conky-spotify/scripts/title.sh}
+
+]];

@@ -1,0 +1,87 @@
+
+conky.config = {
+-- conky news 1
+own_window_argb_visual = true,
+double_buffer= true,
+own_window = true,
+own_window_type = 'desktop',
+own_window_transparent = true,
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+font = 'anorexia:size=10',
+
+-- Borders
+	draw_borders = false,
+
+-- Contour around fonts
+	draw_outline = false,
+
+-- Shades
+	draw_shades = false,
+
+
+-- Position
+	gap_y =20,
+	gap_x = 20,
+
+-- Alignment
+	alignment = 'top_right',
+-- alignment botton_left
+
+-- Interval
+	update_interval = 1,
+
+-- Colors
+	--default_color = '#FFFFFF',
+	own_window_colour ='262524',
+	default_color = '303030',
+	color1 = '#db8a5e',
+	color2 = '#FFFFFF',
+
+
+-- Font
+	use_xft = true,
+
+
+
+-- Text alpha when using Xft
+--xftalpha 0
+
+-- to prevent window from moving
+--use_spacer none
+	minimum_width = 320,
+
+	maximum_width = 500,
+	
+	color1 ='#db8a5e',
+	color2 = '#ccb35a',
+
+
+};
+
+
+conky.text = [[
+
+
+${color1}Debian${color a4a4a4} Kali Linux
+${color1}Kernel:${color a4a4a4}${alignr}$kernel
+${color1}UpTime:${color a4a4a4}${alignr}$uptime
+
+${color 009e60}${execi 300 perl /home/xsisec/.config/conky/scripts/conky-updates.pl}
+
+${color1}${offset 21}$font cpu 1 ${color2}[${freq 1}mhz]
+${color 009e60}${offset 21}$font cpu 2 ${color2}[${freq 2}mhz]
+${color 009e60}${offset 21}$font cpu 3 ${color2}[${freq 3}mhz]
+${color 009e60}${offset 21}$font cpu 4 ${color2}[${freq 4}mhz]
+${color 009e60}${offset 21}$font cpu 5 ${color2}[${freq 5}mhz]
+${color 009e60}${offset 21}$font cpu 6 ${color2}[${freq 6}mhz]
+${color 009e60}${offset 21}$font cpu 7 ${color2}[${freq 7}mhz]
+${color 009e60}${offset 21}$font cpu 8 ${color2}[${freq 8}mhz]
+
+${color 009e60}GPU:${color a4a4a4}${alignr}${execi 20 nvidia-settings -q GPUCurrentClockFreqs |grep Attribute |awk '{print $4}' |cut -c1-7} 
+${color 009e60} ${execi 20 nvidia-settings -q gpucoretemp |grep Attribute |awk '{print $4}'}°C
+${color 009e60}Ram:${color a4a4a4}${alignr}$mem
+${color 009e60}${membar 3,85}
+
+]];
+
+

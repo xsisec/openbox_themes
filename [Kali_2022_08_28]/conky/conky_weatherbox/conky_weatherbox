@@ -1,0 +1,71 @@
+conky.config = {
+
+  -- size
+  alignment = 'top_right',
+  gap_x = 20,
+  gap_y = 20,
+  maximum_width = 182,
+  minimum_width = 182,
+  minimum_height = 228,
+
+  -- update
+  update_interval = 1,
+  total_run_times = 0,
+  net_avg_samples = 1,
+  if_up_strictness = 'link',
+
+  font = 'anorexia:size=6',
+  -- graphic
+
+
+
+    default_color='262524',
+    double_buffer = true,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    stippled_borders =0,
+    draw_graph_borders = false,
+    own_window_colour='303030',
+
+
+  imlib_cache_size = 0,
+  text_buffer_size = 2048,
+  use_xft = true,
+  font = 'Tamzyn:size=8',
+  override_utf8_locale = true,
+
+  -- window
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_transparent = false,
+  own_window_hints = 'undecorated,below,sticky,skip_pager',
+
+  -- color
+
+
+  color0 = 'white',
+  color1 = 'yellow',
+  color2 = '9ACD32',
+  color3 = 'blue',
+
+  -- lua script
+  lua_load = '~/conky_weatherbox/lua/conky_weatherbox.lua',
+  lua_draw_hook_pre = 'pre',
+  lua_draw_hook_post = 'post'
+
+}
+
+conky.text = [[
+${if_gw}${color0}${font ConkyColorsWeather:size=40}${execi 1200 ~/conky_weatherbox/bin/conkyWeather condition_code}${font}${color3}${voffset -40}${offset 10}${font Liberation Sans:style=Bold:size=18}${lua_parse TemperatureColor}${color0}°${execi 1200 ~/conky_weatherbox/bin/conkyWeather unit_temperature}${color}${font}${voffset -8}${color1}${offset 5}${font tamzyn:size=8}${execi 1200 ~/conky_weatherbox/bin/conkyWeather location_city}
+${voffset 6}${alignr}${color2}${execi 1200 ~/conky_weatherbox/bin/conkyWeather condition_date}${color}
+${voffset 26}${color0}${font ConkyWindNESW:size=34}${execi 1200 ~/conky_weatherbox/bin/conkyWeather wind_direction}${font}
+${color2}${goto 8}${execi 1200 ~/conky_weatherbox/bin/conkyWeather wind_speed} ${execi 1200 ~/conky_weatherbox/bin/conkyWeather unit_speed}${color1}
+
+${voffset 6}${goto 10}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast1_day}${goto 44}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast2_day}${goto 82}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast3_day}${goto 124}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast4_day}${goto 160}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast5_day}
+${color0}${font ConkyColorsWeather:size=26}${offset -4}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast1_code}${goto 36}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast2_code}${goto 76}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast3_code}${goto 116}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast4_code}${goto 152}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast5_code}${font}${color}
+${font Liberation Sans:style=Bold:size=8}${color0}${goto 12}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast1_high}${goto 46}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast2_high}${goto 86}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast3_high}${goto 127}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast4_high}${goto 164}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast5_high}${color}
+${color1}${goto 12}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast1_low}${goto 46}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast2_low}${goto 86}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast3_low}${goto 127}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast4_low}${goto 164}${execi 1200 ~/conky_weatherbox/bin/conkyWeather forecast5_low}${color}${font}
+${color0}${goto 4}${lua_bar 4,30 RainBar 1}${goto 40}${lua_bar 4,30 RainBar 2}${goto 78}${lua_bar 4,30 RainBar 3}${goto 118}${lua_bar 4,30 RainBar 4}${goto 156}${lua_bar 4,30 RainBar 5}${color}
+${else}${color0}${font ConkyColorsWeather:size=40}-${font}${color}${execp echo '${if_existing '$HOME'/conky_weatherbox/cache/weather.xml}${voffset -40}${offset 10}${font Liberation Sans:style=Bold:size=18}${lua_parse TemperatureColor}${color0}°${execi 1200 ~/conky_weatherbox/bin/conkyWeather unit_temperature}${color}${font}${voffset -8}${offset 10}${font Liberation Sans:style=Bold:size=10}${execi 1200 ~/conky_weatherbox/bin/conkyWeather location_city}${font}
+${voffset 6}${alignr}${color cccccc}${execi 1200 ~/conky_weatherbox/bin/conkyWeather condition_date}${color}${voffset 20}${endif}'}${endif}]]
