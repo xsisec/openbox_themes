@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Grass
+Comment=Warm, green and brown light theme.
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=Grass
+GtkTheme=Grass
+IconTheme=default
+MetacityTheme=Grass

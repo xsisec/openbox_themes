@@ -1,0 +1,20 @@
+[b]Grass and Grass-Neutral[b]
+
+This is another skeuomorphic theme (that is, non-flat and which imitates "real" elements). This time in light colors but at the same time it is easy on the eyes, avoiding this bright white which I personally don't like.
+It comes in two variations: Grass, which has warmer tones, and Grass-Neutral, which has totally neutral grey colors for window and widgets, although it keeps green for selected elements, and light brown for disabled ones. Yes, this theme, like [url=https://www.gnome-look.org/p/1517069]Soil[/url], upon which it is based, have a brown tint for disabled elements, which is something I like to use for my themes: making disabled elements' condition more explicitly visible.
+
+It is also made with [url=https://github.com/B00merang-Project/Azurra_framework]Azurra Framework[/url].
+
+For this theme I recommend using non-flat icons. I love [url=https://www.pling.com/p/1625931]Newaita-reborn[/url], [url=https://www.pling.com/p/1169579]Obsidian[/url] or my own [url=https://www.pling.com/p/1012233/]Buuf Nestort[url] theme, which has colorful hand drawn icons.
+
+By the way: this GTK3 theme has absolutely no png or svg assets: everything is CSS magic, including checkboxes and radios.
+
+This themes includes the following elements:
+GTK2, GTK3, metacity, openbox, Unity, XFWM4, Cinnamon, Unity, KDE Color scheme, QT5ct color scheme, QtCurve presets. 
+(GTK2, metacity, openbox, Unity, Cinammon and QT5ct color schemes were create using Oomox and then modified by me).
+
+The Xfwm4 theme should adapt to any other GTK theme, so it is very useful in itself.
+
+[b]Donations[/b]
+If I had enough time and income, I'd definitely dedicate much more time to this activity of creating themes, which I enjoy very much. Thank you!
+https://paypal.me/nestorandreu
