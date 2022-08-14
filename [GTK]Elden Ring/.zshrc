@@ -162,15 +162,6 @@ function virtualenv_info {
 
 
 
-loginaws(){
-/home/xsisec/.local/bin/saml2aws login --role arn:aws:sts::916676940122:assumed-role/dev-sso-dmdp-tester-role/khpv724
-export AWS_PROFILE=saml
-}
-
-refreshaws(){
-/home/xsisec/.local/bin/saml2aws login --role arn:aws:sts::916676940122:assumed-role/dev-sso-dmdp-tester-role/khpv724 --force
-export AWS_PROFILE=saml
-}
 
 
 # Print my public IP
@@ -258,19 +249,6 @@ echo $1 | base64 -d
 }
 
 
-#repo
-dp(){
-cd /home/xsisec/ideaProjects/az-dmdp-test-scripts/scripts/dmdp2
-}
-
-#current RT doc
-rt()
-{
-(cd /home/xsisec/IdeaProjects/az-dmdp-test-scripts/scripts/dmdp2/formal-tests/RT34/)
-}
-
-
-
 
 
 
@@ -320,11 +298,6 @@ mvnclean(){
 mvn clean install -DskipTests
 }
 
-ccrun(){
-echo "Starting Cucumber..."
-mvn verify -pl systemtest-cucumber  -Dprofile=sysops-remote-test -Dcucumber.filter.tags=$1
-
-}
 
 ginforminit(){
 	 git add . 
