@@ -1,0 +1,38 @@
+conky.config = {
+    -- Use Xft?
+    font = 'Hack:size=8',
+    use_xft = true,
+    update_interval = 1,
+    total_run_times = 0,
+    own_window = true,
+    own_window_transparent = false,
+    own_window_type = 'dock',
+    own_window_hints = 'undecorated, skip_taskbar, skip_pager, below',
+    double_buffer = false,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    stippled_borders = 0,
+    border_width = 1,  -- Added this line
+    default_color = '1c1b1b',
+    own_window_colour = '191919',
+    alignment = 'top_left',
+    gap_x = 1810,
+    gap_y = 745,  -- Adjusted gap_y value
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    override_utf8_locale = true,
+  }
+  
+  conky.text = [[
+${color 65a0db}Up:${color f7f2f2}${alignr}${upspeed eth0}KB/s
+${color 2f576b}${upspeedgraph eth0 20,85 2f576b 65a0db}
+${color 65a0db}Total: ${color f7f2f2}${totalup eth0}
+
+${color 65a0db}Down:${color f7f2f2}${alignr}${downspeed eth0}KB/s
+${color 2f576b}${downspeedgraph eth0 20,85 2f576b 65a0db}
+${color 65a0db}Total: ${color f7f2f2}${totaldown eth0}
+  ]]
+  

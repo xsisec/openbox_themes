@@ -1,0 +1,51 @@
+conky.config = {
+    background = true,
+    -- font = 'GE Inspira:size=8',
+    uppercase = false,
+    override_utf8_locale = true,
+    alignment = 'top_middle',
+    gap_x = -805,
+    gap_y = 910,
+    minimum_width = 270,
+    maximum_width = 270,
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_argb_visual = true,
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    default_color = 'white',
+    own_window_colour = '191919',
+    double_buffer = true,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+    no_buffers = true,
+    use_xft = true,
+    xftalpha = 0.1,
+    cpu_avg_samples = 2,
+    update_interval = 1,
+    total_run_times = 0,
+    imlib_cache_size = 0,
+    color0 = '#65a0db',
+    color1 = '#5b5b5b',
+    color2 = '#f7f2f2',
+    color3 = '#252018',
+    color4 = '#f7f2f2',
+};
+
+conky.text = [[
+${if_running spotify}
+  ${exec ~/.conky/conky-spotify/scripts/cover.sh}
+${endif}
+${image ~/.conky/conky-spotify/current/current.jpg -p 2,0 -s 90x90}
+${voffset -110}
+${goto 124}${font Hack:size=7}Title:
+${goto 132}${font GE Inspira:size=12}${exec ~/.conky/conky-spotify/scripts/title.sh}
+${voffset -20}
+${goto 124}${font Noto Sans:size=7}Artist:
+${goto 132}${font GE Inspira:size=10}${exec ~/.conky/conky-spotify/scripts/artist.sh}
+${goto 124}${font Noto Sans:size=7}Album:
+${goto 132}${font GE Inspira:size=10}${exec ~/.conky/conky-spotify/scripts/album.sh}
+]];
+

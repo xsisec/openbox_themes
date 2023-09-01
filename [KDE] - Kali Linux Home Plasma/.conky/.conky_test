@@ -1,0 +1,173 @@
+conky.config = {
+update_interval = 1,
+net_avg_samples = 1,
+cpu_avg_samples = 1,
+total_run_times = 0,
+alignment = "top_right",
+gap_x = 5,
+gap_y = 5,
+minimum_width = 275,
+minimum_height = 750,
+own_window = true,
+own_window_type = "normal",
+own_window_hints = "undecorated,below,sticky,skip_taskbar,skip_pager",
+own_window_transparent = false,
+own_window_argb_visual = true,
+own_window_argb_value =35,
+show_graph_scale = false,
+double_buffer = true,
+text_buffer_size = 4096,
+no_buffers = true,
+use_xft = true,
+font = "Larabiefont-Regular:bold:size=11",
+short_units = true,
+temperature_unit = "celsius",
+forced_redraw = false,
+draw_graph_borders = false,
+draw_outline = false,
+draw_shades = true,
+draw_borders = true,
+border_inner_margin = 2,
+border_outer_margin = 0,
+border_width = 3,
+own_window_colour = "080721",
+default_outline_color = "000000",
+default_color = "000415",
+default_shade_color = "080721",
+color0 = '080721',                                                     -- Dark Blue       - Background
+color1 = 'lightblue',                                                  -- Light Blue      - Labels
+color2 = 'orange',                                                     -- Orange          - Monitored Item (Frequently Updates)
+color3 = 'goldenrod1',                                                 -- GoldenRod       - Monitored Item (Infrequent/Versions)
+color4 = 'green',                                                      -- Green           - Headers
+color5 = '0064ff',                                                     -- Blue            - ANSI Header Art
+color6 = 'green3',                                                     -- ?
+color7 = 'white',                                                      -- White           - Drive Labels
+color8 = 'green3',                                                     -- Light Green     - Bar Green
+color9 = 'SteelBlue',                                                  -- Steel Blue      - Bar Scales
+}
+conky.text = [[
+# TIME & DATE
+${goto 25}${color1}${font Larabiefont-Regular:size=26}${time %I:%M:%S%P}${font}
+${goto 27}${voffset 5}${template0}${color1}${time %A %B %e, %Y}
+# CPU 1 & 2
+${goto 18}${voffset 5}${color4}${execi 65000 cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | awk '{print $1" "$2" "$3" "$4" "$5'}}
+${goto 9}${voffset 5}${color1}${font Terminus(TTF):bold:size=11}C01${goto 34}${color2}${cpu cpu1}${goto 62}${color1}%${goto 74}${color2}${freq 1}${goto 105}${color1}Mhz${goto 144}${color1}C02${goto 165}${color2}${cpu cpu2}${goto 196}${color1}%${goto 209}${color2}${freq 2}${goto 242}${color1}Mhz
+${goto 10}${voffset -2}${color6}${cpubar cpu1 7,117}${goto 146}${color6}${cpubar cpu2 7,117}
+${goto 6}${voffset -13}${color1}${font Arial:size=10}└────────────┘${goto 32}┴${goto 63}┴${goto 94}┴${goto 141}${color1}└────────────┘${goto 167}┴${goto 198}┴${goto 223}┴
+# CPU 3 & 4
+${goto 9}${voffset 5}${color1}${font Terminus(TTF):bold:size=11}C03${goto 34}${color2}${cpu cpu3}${goto 62}${color1}%${goto 74}${color2}${freq 3}${goto 105}${color1}Mhz${goto 144}${color1}C04${goto 165}${color2}${cpu cpu4}${goto 196}${color1}%${goto 209}${color2}${freq 4}${goto 242}${color1}Mhz
+${goto 10}${color6}${cpubar cpu3 7,117}${goto 146}${color6}${cpubar cpu4 7,117}
+${goto 6}${voffset -13}${color1}${font Arial:size=10}└────────────┘${goto 32}┴${goto 63}┴${goto 94}┴${goto 141}${color1}└────────────┘${goto 167}┴${goto 198}┴${goto 223}┴
+# CPU 5 & 6
+${goto 9}${voffset 5}${color1}${font Terminus(TTF):bold:size=11}C05${goto 34}${color2}${cpu cpu5}${goto 62}${color1}%${goto 74}${color2}${freq 5}${goto 105}${color1}Mhz${goto 144}${color1}C06${goto 165}${color2}${cpu cpu6}${goto 196}${color1}%${goto 209}${color2}${freq 6}${goto 242}${color1}Mhz
+${goto 10}${color6}${cpubar cpu5 7,117}${goto 146}${color6}${cpubar cpu6 7,117}
+${goto 6}${voffset -13}${color1}${font Arial:size=10}└────────────┘${goto 32}┴${goto 63}┴${goto 94}┴${goto 141}${color1}└────────────┘${goto 167}┴${goto 198}┴${goto 229}┴
+# CPU 7 & 8
+${goto 9}${voffset 5}${color1}${font Terminus(TTF):bold:size=11}C07${goto 34}${color2}${cpu cpu7}${goto 62}${color1}%${goto 74}${color2}${freq 7}${goto 105}${color1}Mhz${goto 144}${color1}C08${goto 169}${color2}${cpu cpu8}${goto 196}${color1}%${goto 209}${color2}${freq 8}${goto 242}${color1}Mhz
+${goto 10}${color6}${cpubar cpu7 7,117}${goto 146}${color6}${cpubar cpu6 8,117}
+${goto 6}${voffset -13}${color1}${font Arial:size=10}└────────────┘${goto 32}┴${goto 63}┴${goto 94}┴${goto 141}${color1}└────────────┘${goto 167}┴${goto 198}┴${goto 229}┴
+# CPU AVERAGE
+${goto 9}${color1}${font Terminus(TTF):bold:size=11}Average ${color2}${goto 120}${cpu cpu0} ${color7}%${color2}${goto 209}${freq 0}${goto 242}${color1}Mhz
+${goto 10}${color6}${if_match ${cpu cpu0}<=50}${color8}${else}${if_match ${cpu cpu0}>=75}${color FF5555}${else}${color yellow}${endif}${endif}${cpubar cpu0 10,244}
+${goto 6}${voffset -12}${color1}${font Arial:size=10}└──────────────────────────┘${goto 64}┴${goto 127}┴${goto 190}┴
+${goto 9}${voffset -6}${font Arial:size=8}${color9}0%${goto 61}25%${goto 124}50%${goto 187}75%${goto 240}100%
+# SYSTEM INFO
+${goto 85}${color4}${font}SYSTEM INFO
+${goto 30}${color5}${font Arial:size=11}┌ ${color1}Uptime${color2}${goto 200}${uptime}
+${goto 3}${color7}${font ConkySymbols:size=20}N${font Arial:size=11}\
+${goto 30}${color5}${voffset -14}├ ${color1}CapsLock (  )${goto 168}NumLock (  )${if_match "${key_caps_lock}"=="Off"}${goto 115}${voffset 2}${color green}${font ConkyColors:size=9}D${font}${else}${goto 115}${voffset 2}${color red}${font ConkyColors:size=9}D${font}${endif}\
+${goto 220}${if_match "${key_num_lock}"=="On"}${goto 236}${voffset -3}${color green}${font ConkyColors:size=9}D${font}${else}${goto 238}${voffset -3}${color red}${font ConkyColors:size=9}D${font}${endif}
+${goto 30}${color5}${font Arial:size=11}${voffset -6}└ ${color1}Load Averages${color9}${font Arial:size=11}${goto 147}┬${color1} 1'${color2}${goto 225}${loadavg 1}
+${goto 60}${voffset -2}${font Arial:size=11}${color2}${loadavg 2}${goto 120}${color1}5'${goto 147}${color9}┴ ${color1} 15'${color2}${goto 225}${loadavg 3}
+# CPU TEMP
+${goto 30}${color5}${font Arial:size=11}┌$color1} CPU Core ${color2}${goto 225}${hwmon 2 temp 1}${color1}°C
+${goto 2}${voffset -10}${color1}${font ConkySymbols:size=20}H${font}\
+${goto 30}${voffset 13}${color5}${font Arial:size=11}${voffset -17}├${color1} CPU Socket ${color2}${goto 225}${hwmon 2 temp 4}${color1}°C
+${goto 30}${color5}${font Arial:size=11}${voffset -1}├${color1} Mainboard ${color2}${goto 225}${hwmon 2 temp 2}${color1}°C
+#
+${goto 3}${voffset -17}${voffset 5}${color1}${font ConkySymbols:size=18}l${font}\
+${goto 30}${color5}${font Arial:size=11}└${color1} CPU${color2}${goto 139}${hwmon 2 fan 1}${color1} rpm${color2}${goto 225}${hwmon 2 fan 1 0.0667 0,0}${color1}${goto 257}%
+# VIDEO CARD
+${goto 46}${color4}${font}${execi 65000 nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits}
+${goto 2}${voffset 15}${color1}${font ConkyColorsLogos:size=20}n${font}\
+${goto 30}${voffset -27}${color5}${font Arial:size=11}┌ ${color1}VRAM${goto 109}${color2}${execi 5 nvidia-smi --query-gpu=memory.used --format=csv,noheader}${color1}  of  ${color2}${execi 5 nvidia-smi --query-gpu=memory.total --format=csv,noheader}
+${goto 30}${color5}├${color1} TEMP ${color2}${goto 225}${nvidia temp}${color1}°C
+${goto 30}${voffset -2}${color5}├${color1} FAN1${color2}${goto 139}${execi 5 nvidia-settings -q [fan:0]/GPUCurrentFanSpeedRPM -t}${color1} rpm${color2}${goto 225}${exec nvidia-settings -q [fan:0]/GPUCurrentFanSpeed -t} ${color1}%
+${goto 30}${color5}├${color1} FAN2${color2}${goto 139}${execi 5 nvidia-settings -q [fan:1]/GPUCurrentFanSpeedRPM -t}${color1} rpm${color2}${goto 225}${exec nvidia-settings -q [fan:1]/GPUCurrentFanSpeed -t}${color1} %
+${goto 30}${color5}├${color1} Used${color2}${goto 225}${nvidia gpuutil}${goto 245}${color1}%
+${goto 30}${color5}├${color1} GCLK${color2}${goto 195}${nvidia gpufreq}${goto 230}${color1}MHz
+${goto 30}${color5}├${color1} MCLK${color2}${goto 190}${nvidia mtrfreq}${goto 232}${color1}Mhz
+${goto 30}${color5}├${color1} Power Used${color2}${goto 200}${execpi 10 nvidia-smi -q | grep 'Power Draw' | awk '{print $4'}}${goto 245}${color1}W
+${goto 30}${color5}├${color1} Power Total${color2}${goto 194}${execi 65000 nvidia-smi -q | grep 'Default Power Limit' | awk '{print $5'}}${goto 245}${color1}W
+${goto 30}${color5}└${color1} Version${color9} ┬ ${color1}X.org:${color2}${goto 194}${exec dpkg -l |grep xserver-xorg-core | awk '{print $3}'}
+${goto 97}${voffset -1}${color9}└${color1} Driver:${color2}${goto 188}${execi 65000 nvidia-smi | grep "Driver Version"| awk {'print $3'}}
+# RAM
+${goto 100}${voffset 5}${color4}${font}${memmax}b RAM
+${goto 48}${color4}${membar 10,200}
+${goto 42}${voffset -16}${color9}${font Arial:size=11}└───────────────────┘${goto 103}┴${goto 155}┴${goto 206}┴
+${goto 46}${voffset -10}${color5}${font Arial:size=9}0%${goto 100}25%${goto 152}50%${goto 202}75%${goto 235}100%
+${goto 2}${voffset 15}${color1}${font ConkySymbols:size=20}j${goto 32}${voffset -30}${color5}${font Arial:size=11}┌ ${color1}Used${color2}${goto 115}${execi 5 neofetch --stdout | grep "Memory:" | awk '{print $2}'}${color2}${goto 225}${memperc}${color1} %
+${goto 32}${voffset -1}${color5}├${color1} Free (+ easily)${color2}${goto 212}${memeasyfree}b
+${goto 32}${voffset -1}${color5}├${color1} Free physical${color2}${goto 212}${memfree}b
+${goto 32}${voffset -1}${color5}├${color1} Cached${color2}${goto 212}${cached}b
+${goto 32}${voffset -1}${color5}├${color1} Buffered${color2}${goto 212}${buffers}b
+${goto 32}${voffset -1}${color5}└${color1} Threads${color2}${goto 180}${running_threads}${goto 210}${color1}of${color2}${goto 235}${threads}
+# STORAGE
+${goto 95}${color4}HARD DRIVE
+${goto 30}${color5}${font Arial:size=11}┌ ${color1}nvme0n1${goto 164}Size${color2}${goto 215}${fs_size /}b
+${goto 3}${color1}${font ConkySymbols:size=20}K\
+${goto 30}${voffset -15}${color5}${font Arial:size=11}├ ${color1}Temp${color2}${goto 85}${hwmon 0 temp 1}${color1}°C${goto 164}${color1}Free${color2}${goto 215}${fs_free /}b
+${goto 30}${voffset -1}${color5}├ ${color1}Used${color2}${goto 85}${fs_used /}b${color2}${goto 215}${fs_used_perc /}${color1} %
+${goto 32}${voffset -1}${color5}│ ${goto 45}${color4}${fs_bar 10,199}
+${goto 39}${voffset -15}${color9}└───────────────────┘${goto 86}┴${goto 138}┴${goto 189}┴
+${goto 30}${voffset -5}${color5}└${goto 45}${voffset -2}${color9}${font Arial:size=9}0%${goto 84}25%${goto 135}50%${goto 187}75%${goto 225}100%
+# HD1
+${goto 30}${color5}${font Arial:size=11}┌ ${color1}HD1${goto 164}${color1}Size${color2}${goto 215}${fs_size /media/Storage/}b
+${goto 3}${color1}${font ConkySymbols:size=20}K\
+${goto 30}${voffset -15}${color5}${font Arial:size=11}├ ${color1}Temp${color2}${goto 85}${exec hddtemp -w -n /dev/sda1}${color1}°C${goto 164}${color1}Free${color2}${goto 215}${fs_free /media/Storage/}b
+${goto 30}${color5}├ ${color1}Used${color2}${goto 85}${fs_used /media/Storage/}b${color2}${goto 215}${fs_used_perc /media/Storage/}${color1} %
+${goto 32}${voffset -1}${color5}│ ${voffset 2}${color green}${fs_bar 10,199 /media/Storage/}
+${goto 39}${voffset -15}${color9}└───────────────────┘${goto 86}┴${goto 138}┴${goto 189}┴
+${goto 30}${voffset -5}${color5}└${goto 45}${voffset -2}${color9}${font Arial:size=9}0%${goto 84}25%${goto 135}50%${goto 187}75%${goto 225}100%
+# HD2
+${goto 30}${color5}${font Arial:size=11}┌ ${color1}HD2${goto 164}${color1}Size${color2}${goto 215}${fs_size /media/Films/}b
+${goto 3}${color1}${font ConkySymbols:size=20}K\
+${goto 30}${voffset -15}${color5}${font Arial:size=11}├ ${color1}Temp${color2}${goto 85}${exec hddtemp -w -n /dev/sda2}${color1}°C${goto 164}${color1}Free${color2}${goto 215}${fs_free /media/Films/}b
+${goto 30}${voffset -1}${color5}├ ${color1}Used${color2}${goto 85}${fs_used /media/Films/}b${color2}${goto 215}${fs_used_perc /media/Films/}${color1} %
+${goto 32}${voffset -1}${color5}│ ${voffset 1}${color green}${fs_bar 10,199 /media/Films/}
+${goto 39}${voffset -15}${color9}└───────────────────┘${goto 86}┴${goto 138}┴${goto 189}┴
+${goto 30}${voffset -5}${color5}└${goto 45}${voffset -2}${color9}${font Arial:size=9}0%${goto 84}25%${goto 135}50%${goto 187}75%${goto 225}100%
+# SYSTEM
+${goto 100}${voffset 5}${color4}${font}SYSTEM
+${goto 30}${color5}${font Arial:size=11}┌ ${color1}${execi 65000 neofetch --stdout | grep "DE:" | awk '{print $2'}}${goto 230}${color3}${execi 65000 neofetch --stdout | grep "DE:" | awk '{print $3'}}
+${goto 3}${color1}${font ConkyColorsLogos:size=20}d\
+${goto 30}${voffset -15}${color5}${font Arial:size=11}├ ${color1}OpenGL${color3}${goto 226}${execi 43200 glxinfo | grep "OpenGL version" | awk '{print $4'}}
+${goto 30}${voffset -1}${color5}├ ${color1}Conky${goto 219}${color3}${conky_version}
+${goto 30}${voffset -1}${color5}├ ${color1}PipeWire${goto 219}${color3}${execi 43200 pipewire --version | awk 'NR==2{print $NF}'}
+${goto 30}${voffset -1}${color5}├ ${color1}OS${goto 178}${color3}${execi 65000 lsb_release -ds | awk '{print $1'}}${goto 229}${execi 65000 lsb_release -cs | awk '{print $1'}}
+${goto 30}${voffset -1}${color5}└ ${color1}Kernel${color3}${goto 165}${kernel}
+# NET
+${if_existing /sys/class/net/enp42s0/operstate up}${goto 100}${voffset 5}${color4}NETWORK INFO
+${goto 30}${color5}${font Arial:size=11}┌${font Fira Code Nerd Font:size=11}${color1} ${color2}${goto 75}${upspeed enp42s0}${goto 200}${color1}${color2}${goto 220}${downspeed enp42s0}
+${goto 3}${color1}${font ConkySymbols:size=16}b\
+${goto 30}${voffset -10}${color5}${font Arial:size=11}├  ${color1}IP${goto 165}${color3}${addrs enp42s0}
+${goto 30}${voffset 0}${color5}├  ${color1}UP${goto 217}${color3}${totalup enp42s0}
+${goto 30}${voffset 0}${color5}└  ${color1}DOWN${goto 217}${color3}${totaldown enp42s0}${else} ${endif}
+# Wifi
+${if_existing /sys/class/net/wlan0/operstate up}${goto 100}${voffset 5}${color4}WIFI INFO
+${goto 30}${color5}${font Arial:size=11}┌${font Fira Code Nerd Font:size=11}${color1} ${color2}${goto 75}${upspeed enp42s0}${goto 200}${color1}${color2}${goto 220}${downspeed enp42s0}
+${goto 3}${color1}${font ConkySymbols:size=16}b\
+${goto 30}${voffset -10}${color5}${font Arial:size=11}├  ${color1}IP${goto 187}${color3}${addrs wlan0}
+${goto 30}${voffset 0}${color5}├  ${color1}UP ${goto 217}${color3}${totalup enp42s0}
+${goto 30}${voffset 0}${color5}└  ${color1}DOWN ${goto 217}${color3}${totaldown enp42s0}
+# Signal
+${goto 0}${voffset 5}${color4}Wifi Signal
+${goto 10}${voffset 5}${color FF0000}0%${goto 240}${color FF7F00}${wireless_link_qual_perc enp42s0}%
+${goto 10}${color FFFFFF}${wireless_link_bar 12,260 wlan0}
+${goto 10}${color FF0000}Bad ${goto 125}${color FFFF00}Good ${goto 240}${color FF7F00}Excellent
+# Battery
+${goto 10}${voffset 5}${color}Battery:${color FF7F00}${goto 55}${battery_time BAT1}
+${goto 10}${color 008000}${battery_bar 20,260 BAT1}${goto 200}${color FF0000}${goto 85}${battery_percent BAT1}% ${else}${endif}
+${voffset -180}
+]]
+ 

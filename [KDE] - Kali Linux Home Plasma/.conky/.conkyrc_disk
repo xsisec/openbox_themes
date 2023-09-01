@@ -1,0 +1,36 @@
+conky.config = {
+    font = 'Hack:size=8',
+    use_xft = true,
+    update_interval = 1,
+    total_run_times = 0,
+    own_window = true,
+    own_window_transparent = false,
+    own_window_type = 'dock',
+    own_window_hints = 'undecorated, skip_taskbar, skip_pager, below',
+    double_buffer = false,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    stippled_borders = 0,
+    default_color = '303030',
+    own_window_colour = '191919',
+    alignment = 'top_left',
+    gap_x = 1802,
+    gap_y = 605,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    override_utf8_locale = true,
+}
+
+conky.text = [[
+${color 65a0db}Disk IO:${color f7f2f2} ${alignr 4}$diskio
+
+${color 65a0db}${diskiograph 20,85 556B2F 65a0db}
+${color 65a0db}Root:     ${color f7f2f2}${fs_free /}
+${color 65a0db}${fs_bar 3,85 /}
+
+${color 65a0db}Home:    ${color f7f2f2}${fs_free /home/}
+${color 65a0db}${fs_bar 3,85 /home/}
+]]
